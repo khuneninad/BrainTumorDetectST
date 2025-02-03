@@ -36,6 +36,7 @@ def predict_tumor_and_type(img):
     return "No tumor detected."
 
 # Streamlit App
+st.set_page_config(page_title="Tumor Detection", page_icon="🧠", layout="centered")
 st.title("Tumor Detection and Classification")
 
 # Upload Image
@@ -51,3 +52,7 @@ if uploaded_file is not None:
     st.image(img, caption='Uploaded Image', use_container_width=True)
     st.write(result)
 
+# Ensure Streamlit runs on port 8080
+if __name__ == "__main__":
+    st.write("Running on AWS with port 8080")
+    st.run()
