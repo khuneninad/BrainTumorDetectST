@@ -58,19 +58,42 @@ import numpy as np
 from io import BytesIO
 import os
 
-# Ensure model directory exists
 MODEL_DIR = os.path.join(os.getcwd(), 'models')
 
+# Check if model directory exists
 if not os.path.exists(MODEL_DIR):
     st.error("Model directory not found. Ensure models are present in 'models/'.")
     st.stop()
 
-# Load the trained models with exception handling
+# Print contents of model directory for debugging
+st.write("Model directory contents:", os.listdir(MODEL_DIR))
+
+# Load the detection model
 try:
-    tumor_detection_model = tf.keras.models.load_model(os.path.join(MODEL_DIR, 'Detection_Model.keras'))
-    tumor_classification_model = tf.keras.models.load_model(os.path.join(MODEL_DIR, 'Classification_Model.keras'))
+    detection_model_path = os.path.join(MODEL_DIR, 'Detection_Model.keras')
+    if not os.path.exists(detection_model_path):
+        st.error(f"Detection model file not found at {detection_model_path}")
+        st.stop()
+
+    tumor_detection_model = tf.keras.models.load_model(detection_model_path)
+    st.success("Detection model loaded successfully.")
+
 except Exception as e:
-    st.error(f"Error loading models: {str(e)}")
+    st.error(f"Error loading Detection Model: {str(e)}")
+    st.stop()
+
+# Load the classification model
+try:
+    classification_model_path = os.path.join(MODEL_DIR, 'Classification_Model.keras')
+    if not os.path.exists(classification_model_path):
+        st.error(f"Classification model file not found at {classification_model_path}")
+        st.stop()
+
+    tumor_classification_model = tf.keras.models.load_model(classification_model_path)
+    st.success("Classification model loaded successfully.")
+
+except Exception as e:
+    st.error(f"Error loading Classification Model: {str(e)}")
     st.stop()
 
 # Define the tumor types (the class labels used during training)
