@@ -1,8 +1,7 @@
-Flask
-tensorflow
-pandas
-numpy
-os
-werkzeug
-BytesIO
-streamlit
+Flask==3.0.3
+tensorflow==2.18.0
+pandas==2.2.2
+numpy==2.0.2
+werkzeug==3.0.3
+streamlit==1.30.0
+gunicorn==21.2.0
