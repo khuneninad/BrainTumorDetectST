@@ -1,0 +1,55 @@
+{% extends 'partial/base.html' %}
+
+{% block title %}All Predictions{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-8 offset-md-2">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Sex</th>
+                    <th>image</th>
+                    <th scope="col">Prediction</th>
+                    <th>date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for data in predicted_tumor %}
+                  <tr>
+                    <th scope="row">{{ data.name }}</th>
+                    <td>{{ data.age }}</td>
+                    <td>
+                      {% if data.sex == 1 %}
+                        Male
+                      {% elif data.sex == 0 %}
+                        Female
+                      {% else %}
+                        Unknown
+                      {% endif %}
+                    </td>
+                    <td><img src="{{ data.tumor_Img.url }}" alt="{{ data.name }}" class="tumor-image"></td>
+                    <td>{{ data.predictions }}</td>
+                    <td>{{ data.date }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% block extra_styles %}
+  <style>
+    .tumor-image {
+      width: 100px;      /* Set a fixed width */
+      height: 100px;     /* Set a fixed height */
+      object-fit: cover; /* Ensures the image maintains its aspect ratio without distortion */
+    }
+  </style>
+{% endblock %}
+
+{% endblock %}

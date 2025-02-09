@@ -1,0 +1,14 @@
+{% extends 'partial/base.html' %}
+{% block title %}Prediction Result{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h3>Prediction Result for {{ data_entry.name }}</h3>
+    <p><strong>Age:</strong> {{ data_entry.age }}</p>
+    <p><strong>Sex:</strong> {{ data_entry.get_sex_display }}</p>
+    <p><strong>Prediction:</strong> {{ data_entry.predictions }}</p>
+    <p><strong>Date:</strong> {{ data_entry.date }}</p>
+    <div>
+        <img src="{{ data_entry.tumor_Img.url }}" alt="Tumor Image" style="width: 300px; height: auto;">
+    </div>
+</div>
+{% endblock %}
